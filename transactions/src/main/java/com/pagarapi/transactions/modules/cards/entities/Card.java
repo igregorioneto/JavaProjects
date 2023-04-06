@@ -1,4 +1,4 @@
-package com.pagarapi.transactions.modules.cards;
+package com.pagarapi.transactions.modules.cards.entities;
 
 import com.pagarapi.transactions.modules.clients.entities.Client;
 import lombok.AllArgsConstructor;
