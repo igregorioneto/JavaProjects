@@ -8,4 +8,6 @@ public interface ICardRepository {
     public Card save(Card card);
 
     public List<Card> findAll();
+
+    public Card findByNumbering(String numbering);
 }

@@ -4,6 +4,7 @@ import com.pagarapi.transactions.modules.cards.entities.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CardInMemoryRepository implements ICardRepository{
@@ -23,5 +24,11 @@ public class CardInMemoryRepository implements ICardRepository{
     @Override
     public List<Card> findAll() {
         return this.cards;
+    }
+
+    @Override
+    public Card findByNumbering(String numbering) {
+        Optional<Card> optional = this.cards.stream().filter(card -> card.getNumbering().equals(numbering)).findFirst();
+        return optional.orElse(null);
     }
 }

@@ -1,6 +1,7 @@
 package com.pagarapi.transactions.modules.cards.entities;
 
 import com.pagarapi.transactions.modules.clients.entities.Client;
+import com.pagarapi.transactions.modules.payment.entities.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,7 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+
+    @OneToOne(mappedBy = "card")
+    private Payment payment;
 }

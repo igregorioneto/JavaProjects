@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface CardJPARepository extends JpaRepository<Card, UUID> {
+    public Card findByNumbering(String numbering);
 }
