@@ -3,6 +3,7 @@ package com.pagarapi.transactions.services.payments;
 import com.pagarapi.transactions.modules.cards.entities.Card;
 import com.pagarapi.transactions.modules.cards.services.CreatedCardService;
 import com.pagarapi.transactions.modules.clients.entities.Client;
+import com.pagarapi.transactions.modules.payment.entities.MethodPayment;
 import com.pagarapi.transactions.modules.payment.entities.Payment;
 import com.pagarapi.transactions.modules.payment.repositories.PaymentInMemoryRepository;
 import com.pagarapi.transactions.modules.payment.services.CreatedPaymentService;
@@ -32,6 +33,7 @@ public class CreatedPaymentServiceTest {
         payment.setId(UUID.randomUUID());
         payment.setDescription("New Payment");
         payment.setValueTransaction(80.0);
+        payment.setMethodPayment(MethodPayment.DEBIT_CARD);
         payment.setCard(card);
 
         PaymentInMemoryRepository repository = new PaymentInMemoryRepository();
