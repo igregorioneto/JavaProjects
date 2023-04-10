@@ -19,7 +19,11 @@ public class Payment {
     private UUID id;
     private double valueTransaction;
     private String description;
+    @Enumerated(EnumType.STRING)
     private MethodPayment methodPayment;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    private double fee;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "card_id", referencedColumnName = "id")
