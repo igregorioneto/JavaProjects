@@ -1,5 +1,6 @@
 package com.pagarapi.transactions.modules.cards.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pagarapi.transactions.modules.clients.entities.Client;
 import com.pagarapi.transactions.modules.payment.entities.Payment;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String numbering;
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date validity;
 
     @ManyToOne

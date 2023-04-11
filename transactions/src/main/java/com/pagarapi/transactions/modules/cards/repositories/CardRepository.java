@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CardRepository implements ICardRepository {
@@ -25,5 +26,11 @@ public class CardRepository implements ICardRepository {
     @Override
     public Card findByNumbering(String numbering) {
         return this.repository.findByNumbering(numbering);
+    }
+
+    @Override
+    public Card findById(UUID id) {
+        Optional<Card> optional = this.repository.findById(id);
+        return optional.orElse(null);
     }
 }

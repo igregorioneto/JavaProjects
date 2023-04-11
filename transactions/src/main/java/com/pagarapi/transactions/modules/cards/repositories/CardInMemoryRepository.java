@@ -31,4 +31,10 @@ public class CardInMemoryRepository implements ICardRepository{
         Optional<Card> optional = this.cards.stream().filter(card -> card.getNumbering().equals(numbering)).findFirst();
         return optional.orElse(null);
     }
+
+    @Override
+    public Card findById(UUID id) {
+        Optional<Card> optional = this.cards.stream().filter(card -> card.getId().equals(id)).findFirst();
+        return optional.orElse(null);
+    }
 }
