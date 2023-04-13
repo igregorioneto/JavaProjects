@@ -6,9 +6,12 @@ import com.pagarapi.transactions.modules.payment.entities.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -18,16 +21,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String numbering;
-    @JsonFormat(pattern = "yyyy/MM/dd")
-    private Date validity;
+    private String validity;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @OneToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
-
-    @OneToOne(mappedBy = "card")
-    private Payment payment;
 }

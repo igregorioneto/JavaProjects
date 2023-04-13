@@ -23,12 +23,17 @@ public class ClientInMemoryRepository implements IClientRepository {
     @Override
     public Client save(Client client) {
         this.clients.add(client);
-        client.setId(UUID.randomUUID());
         return client;
     }
 
     @Override
     public List<Client> findAll() {
         return this.clients;
+    }
+
+    @Override
+    public Client findById(Long id) {
+        Optional<Client> optional = this.clients.stream().filter(client -> client.getId().equals(id)).findFirst();
+        return optional.orElse(null);
     }
 }

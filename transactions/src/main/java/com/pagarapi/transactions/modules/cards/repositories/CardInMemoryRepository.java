@@ -17,7 +17,6 @@ public class CardInMemoryRepository implements ICardRepository{
     @Override
     public Card save(Card card) {
         this.cards.add(card);
-        card.setId(UUID.randomUUID());
         return card;
     }
 
@@ -33,7 +32,7 @@ public class CardInMemoryRepository implements ICardRepository{
     }
 
     @Override
-    public Card findById(UUID id) {
+    public Card findById(Long id) {
         Optional<Card> optional = this.cards.stream().filter(card -> card.getId().equals(id)).findFirst();
         return optional.orElse(null);
     }

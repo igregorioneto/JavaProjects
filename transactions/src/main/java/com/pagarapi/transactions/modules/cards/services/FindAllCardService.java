@@ -5,6 +5,7 @@ import com.pagarapi.transactions.modules.cards.repositories.ICardRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FindAllCardService {

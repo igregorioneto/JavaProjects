@@ -3,6 +3,7 @@ package com.pagarapi.transactions.modules.cards.repositories;
 import com.pagarapi.transactions.modules.cards.entities.Card;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public interface ICardRepository {
@@ -12,5 +13,5 @@ public interface ICardRepository {
 
     public Card findByNumbering(String numbering);
 
-    public Card findById(UUID id);
+    public Card findById(Long id);
 }

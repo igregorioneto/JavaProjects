@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private double valueTransaction;
     private String description;
     @Enumerated(EnumType.STRING)

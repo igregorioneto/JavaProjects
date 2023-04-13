@@ -21,4 +21,9 @@ public class PaymentRepository implements IPaymentRepository {
     public List<Payment> findAll() {
         return this.reporitoy.findAll();
     }
+
+    @Override
+    public Payment findById(Long id) {
+        return this.reporitoy.findById(id);
+    }
 }

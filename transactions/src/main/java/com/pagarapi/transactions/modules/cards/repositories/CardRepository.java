@@ -29,8 +29,7 @@ public class CardRepository implements ICardRepository {
     }
 
     @Override
-    public Card findById(UUID id) {
-        Optional<Card> optional = this.repository.findById(id);
-        return optional.orElse(null);
+    public Card findById(Long id) {
+        return this.repository.findById(id);
     }
 }

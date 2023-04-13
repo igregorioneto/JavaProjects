@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClientRepository implements IClientRepository {
@@ -24,5 +25,10 @@ public class ClientRepository implements IClientRepository {
     @Override
     public List<Client> findAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public Client findById(Long id) {
+        return this.repository.findById(id);
     }
 }

@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface CardJPARepository extends JpaRepository<Card, UUID> {
     public Card findByNumbering(String numbering);
+
+    public Card findById(Long id);
 }

@@ -23,28 +23,9 @@ public class CreatedCardController {
     @Autowired
     private CardRepository repository;
 
-    @Autowired
-    private ClientRepository clientRepository;
-    private ModelMapper modelMapper;
-
     @PostMapping("/")
-    public ResponseEntity<Card> createdCard(@RequestBody CardDTO cardDTO) throws ParseException {
+    public ResponseEntity<Card> createdCard(@RequestBody Card card)  {
         CreatedCardService service = new CreatedCardService(repository);
-        Client client = this.clientRepository.findByCpf(cardDTO.getClientCPF());
-        Card card = convertToEntity(cardDTO);
-        card.setClient(client);
         return new ResponseEntity<>(service.execute(card), HttpStatus.CREATED);
-    }
-
-    private Card convertToEntity(CardDTO cardDTO) throws ParseException {
-        Card card = modelMapper.map(cardDTO, Card.class);
-
-        if (cardDTO.getId() != null) {
-            Card oldCard = this.repository.findById(cardDTO.getId());
-            card.setClient(oldCard.getClient());
-            card.setValidity(oldCard.getValidity());
-            card.setNumbering(oldCard.getNumbering());
-        }
-        return card;
     }
 }
