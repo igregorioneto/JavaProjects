@@ -25,7 +25,16 @@ public class Payment {
     private Status status;
     private double fee;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
+
+    public Payment(double valueTransaction, String description, MethodPayment methodPayment, Status status, double fee, Card card) {
+        this.valueTransaction = valueTransaction;
+        this.description = description;
+        this.methodPayment = methodPayment;
+        this.status = status;
+        this.fee = fee;
+        this.card = card;
+    }
 }

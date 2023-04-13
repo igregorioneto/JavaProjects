@@ -23,9 +23,14 @@ public class CreatedCardController {
     @Autowired
     private CardRepository repository;
 
+    @Autowired
+    private ClientRepository clientRepository;
+
     @PostMapping("/")
-    public ResponseEntity<Card> createdCard(@RequestBody Card card)  {
+    public ResponseEntity<Card> createdCard(@RequestBody CardDTO cardDTO)  {
         CreatedCardService service = new CreatedCardService(repository);
+        Client client = this.clientRepository.findByCpf(cardDTO.getClientCPF());
+        Card card = new Card(cardDTO.getNumbering(), cardDTO.getValidity(), client);
         return new ResponseEntity<>(service.execute(card), HttpStatus.CREATED);
     }
 }

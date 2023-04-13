@@ -29,4 +29,10 @@ public class Card {
     @OneToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
+
+    public Card(String numbering, String validity, Client client) {
+        this.numbering = numbering;
+        this.validity = validity;
+        this.client = client;
+    }
 }
