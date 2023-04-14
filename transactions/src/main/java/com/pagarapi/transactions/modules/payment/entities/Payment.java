@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "payment")
@@ -20,18 +21,18 @@ public class Payment {
     private String description;
     private String methodPayment;
     private String status;
-    private double fee;
+    private String paymentDate;
 
     @OneToOne
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
 
-    public Payment( double valueTransaction, String description, String methodPayment, String status, double fee, Card card) {
+    public Payment(double valueTransaction, String description, String methodPayment, String status, String paymentDate, Card card) {
         this.valueTransaction = valueTransaction;
         this.description = description;
         this.methodPayment = methodPayment;
         this.status = status;
-        this.fee = fee;
+        this.paymentDate = paymentDate;
         this.card = card;
     }
 }
