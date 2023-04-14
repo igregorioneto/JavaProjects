@@ -11,14 +11,12 @@ import javax.persistence.Enumerated;
 public class PaymentDTO {
     private double valueTransaction;
     private String description;
-    @Enumerated(EnumType.STRING)
-    private MethodPayment methodPayment;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String methodPayment;
+    private String status;
     private double fee;
     private Long cardId;
 
-    public PaymentDTO(double valueTransaction, String description, MethodPayment methodPayment, Status status, double fee, Long cardId) {
+    public PaymentDTO(double valueTransaction, String description, String methodPayment, String status, double fee, Long cardId) {
         this.valueTransaction = valueTransaction;
         this.description = description;
         this.methodPayment = methodPayment;
