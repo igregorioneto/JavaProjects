@@ -38,6 +38,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void delete(Long id) {
-        this.repository.delete(id);
+        Product product = this.repository.findById(id).orElse(null);
+        this.repository.delete(product);
     }
 }

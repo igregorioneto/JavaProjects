@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface ProductJPARepository extends JpaRepository<Product, Long> {
 
-    void delete(Long id);
 }
