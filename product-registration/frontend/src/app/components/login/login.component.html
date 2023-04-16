@@ -4,14 +4,14 @@
     </div>
 
     <div class="row">
-        <form class="formulario" [formGroup]="editForm" (ngSubmit)="editValue(editForm.value)">
+        <form class="formulario" [formGroup]="editForm" (ngSubmit)="logar(editForm.value)">
             <div class="mb-3">
-                <input formControlName="name" type="text" class="form-control" placeholder="Username">
+                <input formControlName="username" type="text" class="form-control" placeholder="Username">
 
-                <input formControlName="email" type="text" class="form-control" placeholder="Password">
+                <input formControlName="password" type="password" class="form-control" placeholder="Password">
 
-                <button (click)="editValue(editForm.value)" type="submit" class="btn btn-primary">
-                    Logar
+                <button (click)="logar(editForm.value)" type="submit" class="btn btn-primary">
+                    logar
                 </button>
             </div>
         </form>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/modules/User';
+import { LoginService } from 'src/app/services/login.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-login',
@@ -29,32 +33,39 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private readonly loginService: LoginService,
+    private readonly servicesService: ServicesService,
+    private readonly router: Router,
   ) { }
 
   ngOnInit(): void {
     this.editForm = this.formBuilder.group(
       {
-        name: new FormControl(
+        username: new FormControl(
           "",
           Validators.compose([
             Validators.required,
             Validators.minLength(5),
-            Validators.maxLength(1000)
+            Validators.maxLength(20)
           ])
         ),
-        email: new FormControl(
+        password: new FormControl(
           "",
           Validators.compose([
             Validators.required,
             Validators.minLength(5),
-            Validators.maxLength(1000)
+            Validators.maxLength(20)
           ])
         )
       }
     ); 
   }
 
-  editValue(edit: any) {
+  async logar(data: User) {
+    await this.loginService.login(data)
+    .subscribe({
+      next: (v) => console.log(v),
+    })
   }
 
 }

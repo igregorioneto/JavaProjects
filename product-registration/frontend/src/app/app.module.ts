@@ -8,6 +8,7 @@ import { CreatedProductComponent } from './components/created-product/created-pr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginComponent } from './components/login/login.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MenubarModule
+    MenubarModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
