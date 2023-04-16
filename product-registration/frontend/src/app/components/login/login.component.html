@@ -1,0 +1,19 @@
+<div class="col-8 cadastro">
+    <div class="row">
+        <h3 class="mb-3 title">Login</h3>
+    </div>
+
+    <div class="row">
+        <form class="formulario" [formGroup]="editForm" (ngSubmit)="editValue(editForm.value)">
+            <div class="mb-3">
+                <input formControlName="name" type="text" class="form-control" placeholder="Username">
+
+                <input formControlName="email" type="text" class="form-control" placeholder="Password">
+
+                <button (click)="editValue(editForm.value)" type="submit" class="btn btn-primary">
+                    Logar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

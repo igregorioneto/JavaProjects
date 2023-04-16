@@ -1,0 +1,28 @@
+<p-menubar [model]="items"></p-menubar>
+
+<div class="col-8 cadastro">
+    <div class="row">
+        <h3 class="mb-3 title">Cadastro de Produto</h3>
+    </div>
+
+    <div class="row">
+        <form class="formulario" [formGroup]="editForm" (ngSubmit)="editValue(editForm.value)">
+            <div class="mb-3">
+                <input formControlName="name" type="text" class="form-control" placeholder="Nome do produto">
+
+                <input formControlName="email" type="text" class="form-control" placeholder="Fornecedor">
+
+            </div>
+        </form>
+    </div>
+    
+    <div class="row">
+        <button type="submit" class="btn btn-secondary">
+            Cancelar
+        </button>
+        
+        <button (click)="editValue(editForm.value)" type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+    </div>
+</div>

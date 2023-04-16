@@ -1,0 +1,33 @@
+.error-page {
+    text-align: center;
+
+    .text-warning {
+        color: red;
+        font-size: 150px;
+        line-height: 1;
+        margin-bottom: 40px;
+    }
+
+    .error-content {
+        
+        h3 {
+            font-size: 35px;
+            line-height: 1;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        p {
+            font-size: 20px;
+
+            a {
+                font-weight: bold;
+                text-transform: uppercase;
+                color: red;
+                text-decoration: none;
+            }
+        }
+    }
+
+}
