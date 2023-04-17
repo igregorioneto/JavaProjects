@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GuardGuard } from './guard/guard.guard';
 
 const routes: Routes = [
   {
@@ -22,14 +23,16 @@ const routes: Routes = [
       import('./components/home/home.module').then(
         (m) => m.HomeModule
       ),
-    pathMatch: 'full'
+      canActivate: [ GuardGuard ],
+      pathMatch: 'full'
   },
   {
     path: 'created-product',
     loadChildren: () => 
       import('./components/created-product/created-product.module').then(
         (m) => m.CreatedProductModule
-      )
+      ),
+      canActivate: [ GuardGuard ],
   },
   {
     path: '**',

@@ -64,7 +64,10 @@ export class LoginComponent implements OnInit {
   async logar(data: User) {
     await this.loginService.login(data)
     .subscribe({
-      next: (v) => console.log(v),
+      next: (v) => {
+        this.servicesService.store(v);
+        this.router.navigate(['/home']);
+      },
     })
   }
 

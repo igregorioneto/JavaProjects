@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class DeleteProductController {
     @Autowired
     private ProductRepository repository;

@@ -10,14 +10,16 @@
             <div class="mb-3">
                 <input formControlName="name" type="text" class="form-control" placeholder="Nome do produto">
 
-                <input formControlName="email" type="text" class="form-control" placeholder="Fornecedor">
+                <input formControlName="provider" type="text" class="form-control" placeholder="Fornecedor">
+
+                <input formControlName="amount" type="number" class="form-control" placeholder="Valor">
 
             </div>
         </form>
     </div>
     
     <div class="row">
-        <button type="submit" class="btn btn-secondary">
+        <button (click)="close()" type="submit" class="btn btn-secondary">
             Cancelar
         </button>
         

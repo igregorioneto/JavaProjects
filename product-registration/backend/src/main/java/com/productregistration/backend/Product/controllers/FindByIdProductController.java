@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class FindByIdProductController {
     @Autowired
     private ProductRepository repository;

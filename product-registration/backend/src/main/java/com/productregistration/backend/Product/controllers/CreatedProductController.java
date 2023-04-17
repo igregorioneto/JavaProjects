@@ -13,11 +13,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class CreatedProductController {
     @Autowired
     private ProductRepository repository;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<Product> created(@RequestBody CreatedProductDTO productDTO) {
         try {

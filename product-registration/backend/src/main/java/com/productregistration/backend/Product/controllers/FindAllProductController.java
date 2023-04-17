@@ -13,11 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class FindAllProductController {
     @Autowired
     private ProductRepository repository;
 
     @GetMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<Product>> findAll() {
         try {
             FindAllProductService service = new FindAllProductService(repository);

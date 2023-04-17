@@ -9,7 +9,7 @@ export class ServicesService {
   constructor() { }
   // TOKEN
   store(content: any) {
-    localStorage.setItem(this.tokenKey, JSON.stringify(content));
+    localStorage.setItem(this.tokenKey, content);
   }
 
   remove() {

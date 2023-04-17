@@ -6,16 +6,25 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th>Provider</th>
+                <th>Amount</th>
+                <th>Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{ product.code }}</td>
+                <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ product.provider }}</td>
+                <td>{{ product.amount }}</td>
+                <td>
+                    <small>
+                        <p-button icon="pi pi-file-edit" class="button-options" type="button"  (click)="updateUser(product.id)">
+                        </p-button>
+                        <p-button icon="pi pi-delete-left" class="button-options"  type="button" styleClass="p-button-danger" (click)="deleteUser(product.id)">
+                        </p-button>
+                    </small> 
+                </td>
             </tr>
         </ng-template>
     </p-table>

@@ -8,7 +8,8 @@ import { CreatedProductComponent } from './components/created-product/created-pr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './core/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     MenubarModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

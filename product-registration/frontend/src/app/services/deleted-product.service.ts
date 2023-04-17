@@ -7,14 +7,14 @@ import { ServicesService } from './services.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CreatedProductService {
+export class DeletedProductService {
     private url = "http://localhost:8080";
 
   constructor(private http: HttpClient, private service: ServicesService) { }
 
-  public create(product: Product) {
+  public delete(id: any) {
     const token = "Bearer "+this.service.retrive() || "";
     const headers = { 'Authorization': token }
-    return this.http.post(`${this.url}/products`, product, { headers: headers });
+    return this.http.delete(`${this.url}/products/${id}`, { headers: headers });
   }
 }

@@ -13,11 +13,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class UpdatedProductController {
     @Autowired
     private ProductRepository repository;
 
     @PostMapping("/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Product> created(@PathVariable Long id, @RequestBody CreatedProductDTO productDTO) {
         try {
             UpdatedProductService service = new UpdatedProductService(repository);
