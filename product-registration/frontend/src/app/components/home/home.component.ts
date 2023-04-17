@@ -45,11 +45,8 @@ export class HomeComponent implements OnInit {
     this.findAllProductService.findAll().subscribe({
       next: (v) => {
         this.products = v;
-        console.log(v);
       },
-    })
-      
-      
+    });
   }
 
   logout(): void {

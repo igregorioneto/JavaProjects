@@ -15,7 +15,7 @@ import { UpdatedProductService } from 'src/app/services/updated-product.service'
 })
 export class CreatedProductComponent implements OnInit  {
 
-  user: any = {}
+  title: string = "";
 
   product!: Product | null;
 
@@ -57,6 +57,9 @@ export class CreatedProductComponent implements OnInit  {
       this.editForm?.get("name")?.setValue("");
       this.editForm?.get("provider")?.setValue("");
       this.editForm?.get("amount")?.setValue(0);
+
+      this.title = "Cadastro"
+
     } else {
       this.findByIdProductService.findById(productId)
       .subscribe({
@@ -66,6 +69,8 @@ export class CreatedProductComponent implements OnInit  {
           this.editForm?.get("name")?.setValue(this.product?.name);
           this.editForm?.get("provider")?.setValue(this.product?.provider);
           this.editForm?.get("amount")?.setValue(this.product?.amount);
+
+          this.title = "Edição do Produto " + this.product?.name;
 
           this.items.splice(
             1,
@@ -151,6 +156,9 @@ export class CreatedProductComponent implements OnInit  {
         next: (v) => {
           console.log(v)
           this.router.navigate(['/home']);
+        },
+        error(err) {
+          console.log(err)
         },
       })
       

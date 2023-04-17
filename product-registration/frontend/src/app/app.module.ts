@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from './core/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [

@@ -18,7 +18,7 @@ public class UpdatedProductController {
     @Autowired
     private ProductRepository repository;
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Product> created(@PathVariable Long id, @RequestBody CreatedProductDTO productDTO) {
         try {
