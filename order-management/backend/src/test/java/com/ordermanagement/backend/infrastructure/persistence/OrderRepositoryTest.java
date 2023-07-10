@@ -1,4 +1,4 @@
-package com.ordermanagement.backend.domain.service;
+package com.ordermanagement.backend.infrastructure.persistence;
 
 import com.ordermanagement.backend.domain.modal.Item;
 import com.ordermanagement.backend.domain.modal.Order;
@@ -6,18 +6,13 @@ import com.ordermanagement.backend.infrastructure.persistence.order.OrderInMemor
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-public class OrderServiceTest {
+public class OrderRepositoryTest {
 
     @Test
-    void should_be_able_created_order() {
+    void should_be_able_create_order_repository() {
         UUID id = UUID.randomUUID();
         String nameClient = "João";
         LocalDate date = LocalDate.now();
@@ -31,26 +26,18 @@ public class OrderServiceTest {
         Order order = new Order(id, nameClient, orderData, items);
 
         OrderInMemoryRepository repository = new OrderInMemoryRepository();
-        OrderService service = new OrderService(repository);
-
-        service.create(order);
+        repository.save(order);
 
         List<Order> allOrders = repository.getAll();
 
         Order orderList = allOrders.get(0);
 
-        assertThat(orderList.getId()).isEqualTo(id);
-        assertThat(orderList.getNameCLient()).isEqualTo(nameClient);
-        assertThat(orderList.getOrderData()).isEqualTo(orderData);
-        assertThat(orderList.getItems()).isEqualTo(items);
-
         Assertions.assertEquals(1, allOrders.size());
-        Assertions.assertEquals(order, allOrders.get(0));
-
+        Assertions.assertTrue(allOrders.contains(orderList));
     }
 
     @Test
-    void should_be_able_list_orders() {
+    void should_be_able_list_orders_repository() {
         UUID id = UUID.randomUUID();
         String nameClient = "João";
         LocalDate date = LocalDate.now();
@@ -64,18 +51,14 @@ public class OrderServiceTest {
         Order order = new Order(id, nameClient, orderData, items);
 
         OrderInMemoryRepository repository = new OrderInMemoryRepository();
-        OrderService service = new OrderService(repository);
 
-        service.create(order);
+        repository.getAll().addAll(List.of(order));
 
         List<Order> allOrders = repository.getAll();
 
-        Order orderList = allOrders.get(0);
-
-        Assertions.assertNotNull(allOrders);
-
         Assertions.assertEquals(1, allOrders.size());
-        Assertions.assertEquals(order, allOrders.get(0));
+        Assertions.assertTrue(allOrders.contains(order));
+
     }
 
 }

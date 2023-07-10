@@ -1,4 +1,4 @@
-package com.ordermanagement.backend.infrastructure.persistence;
+package com.ordermanagement.backend.infrastructure.persistence.order;
 
 import com.ordermanagement.backend.domain.interfaces.IOrderRepository;
 import com.ordermanagement.backend.domain.modal.Order;
