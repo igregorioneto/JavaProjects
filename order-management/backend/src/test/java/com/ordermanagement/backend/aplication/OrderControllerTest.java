@@ -78,7 +78,7 @@ public class OrderControllerTest {
         ResponseEntity<List<Order>> response = controller.getAll();
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals(orders, response.getBody());
+        Assertions.assertEquals(orders, response);
     }
 
 }

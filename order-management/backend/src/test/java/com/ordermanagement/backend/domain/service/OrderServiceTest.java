@@ -2,7 +2,7 @@ package com.ordermanagement.backend.domain.service;
 
 import com.ordermanagement.backend.domain.modal.Item;
 import com.ordermanagement.backend.domain.modal.Order;
-import com.ordermanagement.backend.infrastructure.persistence.order.OrderInMemoryRepository;
+import com.ordermanagement.backend.infrastructure.persistence.memory.OrderInMemoryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

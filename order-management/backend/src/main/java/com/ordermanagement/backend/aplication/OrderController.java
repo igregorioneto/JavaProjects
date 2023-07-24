@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private static OrderService service;
+    private OrderService service;
 
     @Autowired
     public OrderController(OrderService service) {
@@ -21,7 +21,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public static ResponseEntity<Void> create(@RequestBody Order order) {
+    public ResponseEntity<Void> create(@RequestBody Order order) {
         service.create(order);
         return ResponseEntity.noContent().build();
     }
