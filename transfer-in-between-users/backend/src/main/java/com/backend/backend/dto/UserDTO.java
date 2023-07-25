@@ -1,24 +1,16 @@
-package com.backend.backend.entity;
+package com.backend.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Entity
-public class User extends BaseEntity {
-    @Column
+public class UserDTO {
     private String name;
 
-    @Column(name = "birth_day")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthday;
-
-    @Column
     private String email;
-
-    @Column
     private double balance;
 
     public String getName() {

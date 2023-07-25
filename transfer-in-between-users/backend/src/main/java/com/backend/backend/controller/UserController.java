@@ -1,8 +1,11 @@
 package com.backend.backend.controller;
 
 import com.backend.backend.business.UserBusiness;
+import com.backend.backend.dto.UserDTO;
 import com.backend.backend.entity.User;
+import com.backend.backend.util.UserDTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,18 +17,19 @@ public class UserController {
     @Autowired
     private UserBusiness business;
 
+    @Autowired
+    private UserDTOConverter userDTOConverter;
+
     @GetMapping
     public List<User> get() {
         return business.findAll();
     }
 
     @PostMapping
-    public User post(@RequestBody User user) {
-       var newUser = new User();
-       newUser.setName(user.getName());
-       newUser.setBirthday(user.getBirthday());
-       newUser.setEmail(user.getEmail());
-       return business.create(newUser);
+    public ResponseEntity<?> post(@RequestBody UserDTO userDTO) {
+       User user = userDTOConverter.convertToEntity(userDTO);
+       User newUser = business.create(user);
+       return ResponseEntity.ok(newUser.getId());
     }
 
 }
