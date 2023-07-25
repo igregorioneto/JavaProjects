@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,13 @@ public class UserController {
     private UserDTOConverter userDTOConverter;
 
     @GetMapping
-    public List<User> get() {
-        return business.findAll();
+    public ResponseEntity<List<UserDTO>> get() {
+        List<User> users = business.findAll();
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for (User user: users) {
+            usersDTO.add(userDTOConverter.convertToDTO(user));
+        }
+        return ResponseEntity.ok(usersDTO);
     }
 
     @PostMapping

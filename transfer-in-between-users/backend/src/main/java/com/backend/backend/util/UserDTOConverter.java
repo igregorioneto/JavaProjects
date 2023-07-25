@@ -16,4 +16,14 @@ public class UserDTOConverter extends ConvertDTO<UserDTO, User>{
         user.setBalance(userDTO.getBalance());
         return user;
     }
+
+    @Override
+    public UserDTO convertToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getName());
+        userDTO.setBirthday(user.getBirthday());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setBalance(user.getBalance());
+        return userDTO;
+    }
 }

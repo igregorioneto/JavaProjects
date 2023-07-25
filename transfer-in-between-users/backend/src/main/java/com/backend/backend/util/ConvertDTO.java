@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class ConvertDTO<DTO, Entity> {
     public abstract Entity convertToEntity(DTO dto);
 
+    public abstract DTO convertToDTO(Entity entity);
+
     protected LocalDate parseDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(date, formatter);
