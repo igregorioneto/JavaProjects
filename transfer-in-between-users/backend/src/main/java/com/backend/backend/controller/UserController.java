@@ -1,6 +1,7 @@
 package com.backend.backend.controller;
 
 import com.backend.backend.business.UserBusiness;
+import com.backend.backend.core.GenericControllerImpl;
 import com.backend.backend.dto.UserDTO;
 import com.backend.backend.entity.User;
 import com.backend.backend.util.UserDTOConverter;
@@ -10,12 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends GenericControllerImpl<User, UUID, UserBusiness> {
 
-    @Autowired
+    public UserController(UserBusiness service) {
+        super(service);
+    }
+
+    /*@Autowired
     private UserBusiness business;
 
     @Autowired
@@ -36,6 +42,6 @@ public class UserController {
        User user = userDTOConverter.convertToEntity(userDTO);
        User newUser = business.save(user);
        return ResponseEntity.ok(newUser.getId());
-    }
+    }*/
 
 }
