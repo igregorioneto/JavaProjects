@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> get() {
-        List<User> users = business.findAll();
+        List<User> users = business.getAll();
         List<UserDTO> usersDTO = new ArrayList<>();
         for (User user: users) {
             usersDTO.add(userDTOConverter.convertToDTO(user));
@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> post(@RequestBody UserDTO userDTO) {
        User user = userDTOConverter.convertToEntity(userDTO);
-       User newUser = business.create(user);
+       User newUser = business.save(user);
        return ResponseEntity.ok(newUser.getId());
     }
 
