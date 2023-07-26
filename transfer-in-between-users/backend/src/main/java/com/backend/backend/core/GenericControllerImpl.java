@@ -33,11 +33,11 @@ public abstract class GenericControllerImpl<T, ID, S extends GenericService<T, I
         return ResponseEntity.ok(newEntity);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<T> update(@PathVariable ID id, @RequestBody T entity) {
-        T updatedEntity = (T) service.getById(id).orElse(null);
-        return null;
-    }*/
+        T updatedEntity = service.update(id, entity);
+        return ResponseEntity.ok(updatedEntity);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable ID id) {
