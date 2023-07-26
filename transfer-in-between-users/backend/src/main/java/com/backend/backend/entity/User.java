@@ -18,8 +18,6 @@ public class User extends BaseEntity {
     @Column
     private String email;
 
-    @Column
-    private double balance;
 
     public String getName() {
         return name;
@@ -45,11 +43,4 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 }

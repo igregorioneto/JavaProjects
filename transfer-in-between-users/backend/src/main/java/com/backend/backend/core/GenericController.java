@@ -9,6 +9,6 @@ public interface GenericController<T, ID> {
     ResponseEntity<List<T>> getAll();
     ResponseEntity<Optional<T>> getById(ID id);
     ResponseEntity<T> create(T t);
-    //ResponseEntity<T> update(ID id, T t);
+    ResponseEntity<T> update(ID id, T t);
     ResponseEntity<Void> delete(ID id);
 }

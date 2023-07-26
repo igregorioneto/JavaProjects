@@ -13,7 +13,6 @@ public class UserDTOConverter extends ConvertDTO<UserDTO, User>{
         user.setName(userDTO.getName());
         user.setBirthday(userDTO.getBirthday());
         user.setEmail(userDTO.getEmail());
-        user.setBalance(userDTO.getBalance());
         return user;
     }
 
@@ -23,7 +22,6 @@ public class UserDTOConverter extends ConvertDTO<UserDTO, User>{
         userDTO.setName(user.getName());
         userDTO.setBirthday(user.getBirthday());
         userDTO.setEmail(user.getEmail());
-        userDTO.setBalance(user.getBalance());
         return userDTO;
     }
 }
