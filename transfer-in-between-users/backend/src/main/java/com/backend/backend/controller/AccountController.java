@@ -39,33 +39,38 @@ public class AccountController extends GenericControllerImpl<Account, UUID, Acco
 
     @PostMapping("/new")
     public ResponseEntity<SuccessResponseDTO<?>> create(@RequestBody AccountDTO dto) {
-        Account account = new Account();
-        User user = userBusiness.getById(dto.getUser_id()).orElse(null);
+        try {
+            Account account = new Account();
+            User user = userBusiness.getById(dto.getUser_id()).orElse(null);
 
-        if(service.exintingUserInAccount(user)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "User contains account")
+            if(service.exintingUserInAccount(user)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "User contains account")
+                );
+            }
+
+            if(user != null) {
+                account.setUser(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "Not found User")
+                );
+            }
+
+            if(dto.getBalance() != null) {
+                account.setBalance(dto.getBalance());
+            } else {
+                account.setBalance(0.0);
+            }
+
+            Account a = service.save(account);
+
+            return ResponseEntity.ok(
+                    successResponse.MessageReturn("Success", HttpStatus.OK.value(), a)
             );
+        } catch (InternalError e) {
+            throw new InternalError(e.getMessage());
         }
 
-        if(user != null) {
-            account.setUser(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "Not found User")
-            );
-        }
-
-        if(dto.getBalance() != null) {
-            account.setBalance(dto.getBalance());
-        } else {
-            account.setBalance(0.0);
-        }
-
-        Account a = service.save(account);
-
-        return ResponseEntity.ok(
-                successResponse.MessageReturn("Success", HttpStatus.OK.value(), a)
-        );
     }
 }
