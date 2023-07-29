@@ -8,6 +8,7 @@ import com.backend.backend.dto.SuccessResponseDTO;
 import com.backend.backend.entity.Account;
 import com.backend.backend.entity.User;
 import com.backend.backend.exception.AccountNotFoundException;
+import com.backend.backend.util.ResponseMessage;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +26,34 @@ import java.util.UUID;
 public class AccountController extends GenericControllerImpl<Account, UUID, AccountBusiness> {
     @Autowired
     private UserBusiness userBusiness;
+
+    @Autowired
+    private ResponseMessage<Account> successResponse;
+
+    @Autowired
+    private ResponseMessage<String> errorResponse;
+
     public AccountController(AccountBusiness service) {
         super(service);
     }
 
     @PostMapping("/new")
     public ResponseEntity<SuccessResponseDTO<?>> create(@RequestBody AccountDTO dto) {
-        SuccessResponseDTO<Account> successResponse = new SuccessResponseDTO<>();
-        SuccessResponseDTO<String> errorResponse = new SuccessResponseDTO<>();
-
         Account account = new Account();
         User user = userBusiness.getById(dto.getUser_id()).orElse(null);
 
         if(service.exintingUserInAccount(user)) {
-            errorResponse.setMessage("Error");
-            errorResponse.setHttpStatus(HttpStatus.NOT_FOUND.value());
-            errorResponse.setData("User contains account");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "User contains account")
+            );
         }
 
         if(user != null) {
             account.setUser(user);
         } else {
-            errorResponse.setMessage("Error");
-            errorResponse.setHttpStatus(HttpStatus.NOT_FOUND.value());
-            errorResponse.setData("Not found User");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "Not found User")
+            );
         }
 
         if(dto.getBalance() != null) {
@@ -60,10 +63,9 @@ public class AccountController extends GenericControllerImpl<Account, UUID, Acco
         }
 
         Account a = service.save(account);
-        successResponse.setMessage("Success");
-        successResponse.setHttpStatus(HttpStatus.OK.value());
-        successResponse.setData(a);
 
-        return ResponseEntity.ok(successResponse);
+        return ResponseEntity.ok(
+                successResponse.MessageReturn("Success", HttpStatus.OK.value(), a)
+        );
     }
 }
