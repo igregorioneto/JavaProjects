@@ -1,9 +1,6 @@
 package com.backend.backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 import java.lang.reflect.Type;
 
@@ -21,6 +18,10 @@ public class Card extends BaseEntity {
 
     @Column(columnDefinition = "varchar(10)")
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public TypeCard getType() {
         return TypeCard.valueOf(type.toUpperCase());

@@ -58,9 +58,9 @@ public class AccountController extends GenericControllerImpl<Account, UUID, Acco
             }
 
             if(dto.getBalance() != null) {
-                account.setBalance(dto.getBalance());
+                account.setVoucher(dto.getBalance());
             } else {
-                account.setBalance(0.0);
+                account.setVoucher(0.0);
             }
 
             Account a = service.save(account);

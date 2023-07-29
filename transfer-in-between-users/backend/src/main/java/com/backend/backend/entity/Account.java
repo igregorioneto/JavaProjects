@@ -2,6 +2,7 @@ package com.backend.backend.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -10,7 +11,10 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
     @Column
-    private Double balance;
+    private Double voucher;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards;
 
     public User getUser() {
         return user;
@@ -20,11 +24,19 @@ public class Account extends BaseEntity {
         this.user = user;
     }
 
-    public Double getBalance() {
-        return balance;
+    public Double getVoucher() {
+        return voucher;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setVoucher(Double voucher) {
+        this.voucher = voucher;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }
