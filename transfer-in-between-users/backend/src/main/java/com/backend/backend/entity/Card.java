@@ -16,19 +16,30 @@ public class Card extends BaseEntity {
     @Column(name = "security_code",length = 4)
     private String securityCode;
 
+    @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(10)")
-    private String type;
+    private TypeCard type;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
+    public Card() {}
+
+    public Card(String numeration, String validity, String securityCode, TypeCard type, Account account) {
+        this.numeration = numeration;
+        this.validity = validity;
+        this.securityCode = securityCode;
+        this.type = type;
+        this.account = account;
+    }
+
     public TypeCard getType() {
-        return TypeCard.valueOf(type.toUpperCase());
+        return type;
     }
 
     public void setType(TypeCard type) {
-        this.type = type.getValue();
+        this.type = type;
     }
 
     public String getNumeration() {
@@ -53,5 +64,13 @@ public class Card extends BaseEntity {
 
     public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
