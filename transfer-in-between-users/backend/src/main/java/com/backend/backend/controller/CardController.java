@@ -63,7 +63,6 @@ public class CardController extends GenericControllerImpl<Card, UUID, CardBusine
                     successResponse.MessageReturn("Success", HttpStatus.OK.value(), c)
             );
         } catch (Exception e) {
-            if (!response.is)
             throw new InternalError(e.getMessage());
         }
     }
