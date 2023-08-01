@@ -1,5 +1,9 @@
 package com.backend.backend.core;
 
+import com.backend.backend.dto.SuccessResponseDTO;
+import com.backend.backend.util.ResponseMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +14,19 @@ public abstract class GenericControllerImpl<T, ID, S extends GenericService<T, I
 
     protected final S service;
 
+    @Autowired
+    private ResponseMessage<T> mensage;
+
     public GenericControllerImpl(S service) {
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<List<T>> getAll() {
+    public ResponseEntity<SuccessResponseDTO<?>> getAll() {
         List<T> entities = service.getAll();
-        return ResponseEntity.ok(entities);
+        return ResponseEntity.ok(
+                mensage.MessageReturn("Success", HttpStatus.OK.value(), (T) entities)
+        );
     }
 
     @GetMapping("/{id}")
