@@ -8,13 +8,11 @@ import com.backend.backend.dto.SuccessResponseDTO;
 import com.backend.backend.entity.Account;
 import com.backend.backend.entity.Card;
 import com.backend.backend.util.ResponseMessage;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -39,23 +37,23 @@ public class CardController extends GenericControllerImpl<Card, UUID, CardBusine
     public ResponseEntity<SuccessResponseDTO<?>> create(@RequestBody CardDTO cardDTO) {
         try {
             Account account = accountBusiness.getById(cardDTO.getAccount_id()).orElse(null);
+            Card card = new Card();
 
-            if(account == null) {
+            card.setType(cardDTO.getType());
+            card.setValidity(cardDTO.getValidity());
+            card.setSecurityCode(cardDTO.getSecurityCode());
+            card.setNumeration(cardDTO.getNumeration());
+
+            if(account != null) {
+                card.setAccount(account);
+
+                //account.getCards().add(card);
+                //accountBusiness.save(account);
+            } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "Account not exists")
                 );
             }
-
-            Card card = new Card(
-                    cardDTO.getNumeration(),
-                    cardDTO.getValidity(),
-                    cardDTO.getSecurityCode(),
-                    cardDTO.getType(),
-                    account
-            );
-
-            account.getCards().add(card);
-            accountBusiness.save(account);
 
             Card c = service.save(card);
 
@@ -65,5 +63,10 @@ public class CardController extends GenericControllerImpl<Card, UUID, CardBusine
         } catch (Exception e) {
             throw new InternalError(e.getMessage());
         }
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 }
