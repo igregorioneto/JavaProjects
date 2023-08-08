@@ -2,6 +2,7 @@ package com.backend.backend.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Item extends BaseEntity{
@@ -10,6 +11,9 @@ public class Item extends BaseEntity{
 
     @Column
     private double price;
+
+    @ManyToOne
+    private ShoppingCart shoppingCart;
 
     public String getName() {
         return name;
@@ -25,5 +29,13 @@ public class Item extends BaseEntity{
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }
