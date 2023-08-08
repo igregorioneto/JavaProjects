@@ -47,20 +47,26 @@ public class ShoppingCartController extends GenericControllerImpl<ShoppingCart, 
     @PostMapping("/new")
     public ResponseEntity<SuccessResponseDTO<?>> create(@RequestBody ShoppingCartDTO dto) {
         try {
-            Account account = new Account();
-            if(dto.getAccount_id() != null) {
-                account = accountBusiness.getById(dto.getAccount_id()).orElse(null);
+            Account account = accountBusiness.getById(dto.getAccount_id()).orElse(null);
+            if(account == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorMessage.MessageReturn("Error", HttpStatus.NO_CONTENT.value(), "Not found account!")
+                );
+            }
+
+            if (dto.getItems() == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorMessage.MessageReturn("Error", HttpStatus.NO_CONTENT.value(),"Not found items")
+                );
             }
 
             List<Item> items = new ArrayList<>();
             double totalPayment = 0;
-            if (dto.getItems() != null) {
-                for (UUID i: dto.getItems()) {
-                    Item item = itemBusiness.getById(i).orElse(null);
-                    if (item != null) {
-                        items.add((item));
-                        totalPayment += item.getPrice();
-                    }
+            for (UUID i: dto.getItems()) {
+                Item item = itemBusiness.getById(i).orElse(null);
+                if (item != null) {
+                    items.add((item));
+                    totalPayment += item.getPrice();
                 }
             }
 
