@@ -29,6 +29,9 @@ import java.util.UUID;
 public class ShoppingCartController extends GenericControllerImpl<ShoppingCart, UUID, ShoppingCartBusiness> {
 
     @Autowired
+    private ShoppingCartBusiness shoppingCartBusiness;
+
+    @Autowired
     private AccountBusiness accountBusiness;
 
     @Autowired
@@ -70,7 +73,7 @@ public class ShoppingCartController extends GenericControllerImpl<ShoppingCart, 
                 }
             }
 
-            ShoppingCart shoppingCart = new ShoppingCart(items, account, totalPayment);
+            ShoppingCart shoppingCart = shoppingCartBusiness.save(new ShoppingCart(items, account, totalPayment));
 
             return ResponseEntity.ok(
                     successMessage.MessageReturn("Success", HttpStatus.OK.value(),shoppingCart)

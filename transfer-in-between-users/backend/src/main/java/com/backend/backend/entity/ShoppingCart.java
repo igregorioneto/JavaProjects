@@ -9,9 +9,7 @@ import java.util.List;
 @Entity
 public class ShoppingCart extends BaseEntity {
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "shopping-cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "item_id")
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)

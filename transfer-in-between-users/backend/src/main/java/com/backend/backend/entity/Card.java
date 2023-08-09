@@ -1,5 +1,6 @@
 package com.backend.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.lang.reflect.Type;
@@ -20,6 +21,7 @@ public class Card extends BaseEntity {
     @Column(columnDefinition = "varchar(10)")
     private TypeCard type;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;

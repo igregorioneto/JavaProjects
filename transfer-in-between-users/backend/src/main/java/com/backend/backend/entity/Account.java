@@ -15,7 +15,6 @@ public class Account extends BaseEntity {
     @Column
     private Double voucher;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Card> cards = new ArrayList<>();
 
