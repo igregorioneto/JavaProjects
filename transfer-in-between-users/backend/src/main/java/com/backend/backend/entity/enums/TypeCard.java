@@ -1,4 +1,4 @@
-package com.backend.backend.entity;
+package com.backend.backend.entity.enums;
 
 public enum TypeCard {
     CREDIT("credit"),

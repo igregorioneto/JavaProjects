@@ -1,9 +1,8 @@
 package com.backend.backend.entity;
 
+import com.backend.backend.entity.enums.TypeCard;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.lang.reflect.Type;
 
 @Entity
 public class Card extends BaseEntity {

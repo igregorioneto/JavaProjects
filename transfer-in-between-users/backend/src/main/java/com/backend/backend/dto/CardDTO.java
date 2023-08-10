@@ -1,6 +1,6 @@
 package com.backend.backend.dto;
 
-import com.backend.backend.entity.TypeCard;
+import com.backend.backend.entity.enums.TypeCard;
 
 import java.util.UUID;
 
