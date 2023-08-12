@@ -19,6 +19,9 @@ public class ShoppingCart extends BaseEntity {
     @Column(name = "total_payment")
     private double totalPayment;
 
+    @Column(name = "successful_payment", columnDefinition = "boolean default false")
+    private boolean successfulPayment;
+
     public ShoppingCart() {}
 
     public ShoppingCart(List<Item> items, Account account, double totalPayment) {

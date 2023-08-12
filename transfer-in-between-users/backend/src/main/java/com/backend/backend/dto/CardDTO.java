@@ -8,6 +8,9 @@ public class CardDTO {
     private String numeration;
     private String validity;
     private String securityCode;
+
+    private Double availableValue;
+
     private TypeCard type;
     private UUID account_id;
 
@@ -33,6 +36,14 @@ public class CardDTO {
 
     public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
+    }
+
+    public Double getAvailableValue() {
+        return availableValue;
+    }
+
+    public void setAvailableValue(Double availableValue) {
+        this.availableValue = availableValue;
     }
 
     public TypeCard getType() {

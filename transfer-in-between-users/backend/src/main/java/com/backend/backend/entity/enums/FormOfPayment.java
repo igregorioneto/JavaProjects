@@ -1,7 +1,7 @@
 package com.backend.backend.entity.enums;
 
 public enum FormOfPayment {
-    VAUCHER("voucher"),
+    VOUCHER("voucher"),
     CARD("card"),
     TICKET("ticket");
 

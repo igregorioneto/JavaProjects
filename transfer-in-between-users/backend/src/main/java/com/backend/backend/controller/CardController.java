@@ -43,12 +43,10 @@ public class CardController extends GenericControllerImpl<Card, UUID, CardBusine
             card.setValidity(cardDTO.getValidity());
             card.setSecurityCode(cardDTO.getSecurityCode());
             card.setNumeration(cardDTO.getNumeration());
+            card.setAvailableValue(cardDTO.getAvailableValue());
 
             if(account != null) {
                 card.setAccount(account);
-
-                //account.getCards().add(card);
-                //accountBusiness.save(account);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         errorResponse.MessageReturn("Error", HttpStatus.NOT_FOUND.value(), "Account not exists")
