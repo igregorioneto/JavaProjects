@@ -1,15 +1,18 @@
 package com.backend.backend.controller;
 
+import com.backend.backend.business.AccountBusiness;
 import com.backend.backend.business.CardBusiness;
 import com.backend.backend.business.PaymentBusiness;
 import com.backend.backend.business.ShoppingCartBusiness;
 import com.backend.backend.core.GenericControllerImpl;
 import com.backend.backend.dto.PaymentDTO;
 import com.backend.backend.dto.SuccessResponseDTO;
+import com.backend.backend.entity.Account;
 import com.backend.backend.entity.Card;
 import com.backend.backend.entity.Payment;
 import com.backend.backend.entity.ShoppingCart;
 import com.backend.backend.entity.enums.FormOfPayment;
+import com.backend.backend.entity.enums.PaymentStatus;
 import com.backend.backend.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,9 @@ import java.util.UUID;
 public class PaymentController extends GenericControllerImpl<Payment, UUID, PaymentBusiness> {
     @Autowired
     private ShoppingCartBusiness shoppingCartBusiness;
+
+    @Autowired
+    private AccountBusiness accountBusiness;
 
     @Autowired
     private CardBusiness cardBusiness;
@@ -68,12 +74,27 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
                     if (cardSelected.getAvailableValue() >= shoppingCart.getTotalPayment()) {
                         // successful payment
                         // discount the value of card
+                        double credit = cardSelected.getAvailableValue() - shoppingCart.getTotalPayment();
+                        cardSelected.setAvailableValue(credit);
+                        cardBusiness.update(cardSelected.getId(),cardSelected);
+
+                        payment.setCardSelected(cardSelected);
+                        payment.setShoppingCart(shoppingCart);
+                        payment.setFormOfPayment(dto.getFormOfPayment());
+                        payment.setPaymentStatus(PaymentStatus.SUCCESS);
                     }
                     break;
                 case VOUCHER:
                     if (shoppingCart.getAccount().getVoucher() >= shoppingCart.getTotalPayment()) {
                         // successful payment
                         // discount the value of the voucher
+                        double voucher = shoppingCart.getAccount().getVoucher() - shoppingCart.getTotalPayment();
+                        shoppingCart.getAccount().setVoucher(voucher);
+                        accountBusiness.update(shoppingCart.getAccount().getId(), shoppingCart.getAccount());
+
+                        payment.setShoppingCart(shoppingCart);
+                        payment.setFormOfPayment(dto.getFormOfPayment());
+                        payment.setPaymentStatus(PaymentStatus.SUCCESS);
                     }
                     break;
                 case TICKET:
@@ -83,7 +104,7 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
             }
 
             return ResponseEntity.ok(
-                    successMessage.MessageReturn("Success", HttpStatus.OK.value(), payment)
+                    successMessage.MessageReturn("Success", HttpStatus.OK.value(), service.save(payment))
             );
         } catch (InternalError e) {
             throw new InternalError(e.getMessage());
