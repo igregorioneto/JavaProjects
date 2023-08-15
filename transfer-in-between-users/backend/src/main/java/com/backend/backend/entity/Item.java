@@ -14,9 +14,8 @@ public class Item extends BaseEntity{
     @Column
     private double price;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
     public String getName() {
