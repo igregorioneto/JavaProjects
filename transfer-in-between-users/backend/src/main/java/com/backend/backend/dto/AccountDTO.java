@@ -5,7 +5,7 @@ import java.util.UUID;
 public class AccountDTO {
     private UUID user_id;
 
-    private Double balance;
+    private Double voucher;
 
     public UUID getUser_id() {
         return user_id;
@@ -15,11 +15,11 @@ public class AccountDTO {
         this.user_id = user_id;
     }
 
-    public Double getBalance() {
-        return balance;
+    public Double getVoucher() {
+        return voucher;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setVoucher(Double voucher) {
+        this.voucher = voucher;
     }
 }

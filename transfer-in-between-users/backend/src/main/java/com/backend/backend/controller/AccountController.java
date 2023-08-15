@@ -54,8 +54,8 @@ public class AccountController extends GenericControllerImpl<Account, UUID, Acco
                 );
             }
 
-            if(dto.getBalance() != null) {
-                account.setVoucher(dto.getBalance());
+            if(dto.getVoucher() != null) {
+                account.setVoucher(dto.getVoucher());
             } else {
                 account.setVoucher(0.0);
             }
