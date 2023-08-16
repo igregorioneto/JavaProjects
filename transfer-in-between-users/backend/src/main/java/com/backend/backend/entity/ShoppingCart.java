@@ -24,6 +24,10 @@ public class ShoppingCart extends BaseEntity {
 
     public ShoppingCart() {}
 
+    public ShoppingCart(Account account) {
+        this.account = account;
+    }
+
     public ShoppingCart(List<Item> items, Account account, double totalPayment) {
         this.items = items;
         this.account = account;
@@ -52,5 +56,13 @@ public class ShoppingCart extends BaseEntity {
 
     public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
+    }
+
+    public boolean isSuccessfulPayment() {
+        return successfulPayment;
+    }
+
+    public void setSuccessfulPayment(boolean successfulPayment) {
+        this.successfulPayment = successfulPayment;
     }
 }

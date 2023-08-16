@@ -5,6 +5,7 @@ import com.backend.backend.business.AccountBusiness;
 import com.backend.backend.business.ItemBusiness;
 import com.backend.backend.business.ShoppingCartBusiness;
 import com.backend.backend.core.GenericControllerImpl;
+import com.backend.backend.dto.ShoppingCartCreateDTO;
 import com.backend.backend.dto.ShoppingCartDTO;
 import com.backend.backend.dto.SuccessResponseDTO;
 import com.backend.backend.entity.Account;
@@ -45,6 +46,28 @@ public class ShoppingCartController extends GenericControllerImpl<ShoppingCart, 
 
     public ShoppingCartController(ShoppingCartBusiness service) {
         super(service);
+    }
+
+    @PostMapping("/new-shopping-cart")
+    public ResponseEntity<SuccessResponseDTO<?>> createShoppingCart(@RequestBody ShoppingCartCreateDTO dto) {
+        try {
+            Account account = accountBusiness.getById(dto.getAccount_id()).orElse(null);
+            if (account == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    errorMessage.MessageReturn("Error", HttpStatus.NO_CONTENT.value(), "Not found account!")
+                );
+            }
+
+            ShoppingCart shoppingCart = new ShoppingCart(account);
+            shoppingCart.setTotalPayment(0);
+            shoppingCart.setSuccessfulPayment(false);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    successMessage.MessageReturn("Success", HttpStatus.OK.value(), service.save(shoppingCart))
+            );
+        } catch (InternalError e) {
+            throw new InternalError(e.getMessage());
+        }
     }
 
     @PostMapping("/new")
