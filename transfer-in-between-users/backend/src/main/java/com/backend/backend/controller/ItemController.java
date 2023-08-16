@@ -38,12 +38,34 @@ public class ItemController extends GenericControllerImpl<Item, UUID, ItemBusine
     public ResponseEntity<SuccessResponseDTO<?>> addItemShoppingCart(@RequestBody ItemShoppingCartDTO dto) {
         try {
             ShoppingCart shoppingCart = shoppingCartBusiness.getById(dto.getShopping_cart_id()).orElse(null);
+            if (shoppingCart == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorMessage.MessageReturn(
+                                "Error",
+                                HttpStatus.NO_CONTENT.value(),
+                                "Shopping cart not found"
+                        )
+                );
+            }
 
             Item item = service.getById(dto.getItem_id()).orElse(null);
+            if(item == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        errorMessage.MessageReturn(
+                                "Error",
+                                HttpStatus.NO_CONTENT.value(),
+                                "Item not found"
+                        )
+                );
+            }
+
+            shoppingCart.setTotalPayment(shoppingCart.getTotalPayment() + item.getPrice());
 
             item.setShoppingCart(shoppingCart);
 
             service.update(item.getId(), item);
+
+            shoppingCartBusiness.update(shoppingCart.getId(), shoppingCart);
 
             return ResponseEntity.ok().body(
               successMessage.MessageReturn(

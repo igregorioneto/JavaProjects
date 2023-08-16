@@ -53,12 +53,12 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
             Payment payment = new Payment();
 
             ShoppingCart shoppingCart = shoppingCartBusiness.getById(dto.getShopping_cart_id()).orElse(null);
-            if (shoppingCart == null) {
+            if (shoppingCart == null || shoppingCart.getSuccessfulPayment()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         errorMessage.MessageReturn(
                                 "Error",
                                 HttpStatus.NO_CONTENT.value(),
-                                "Dont found shopping cart"
+                                "Dont found shopping cart or Can't use this Shopping Cart"
                         )
                 );
             }
@@ -82,6 +82,8 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
                         payment.setShoppingCart(shoppingCart);
                         payment.setFormOfPayment(dto.getFormOfPayment());
                         payment.setPaymentStatus(PaymentStatus.SUCCESS);
+
+                        shoppingCart.setSuccessfulPayment(true);
                     }
                     break;
                 case VOUCHER:
@@ -95,6 +97,8 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
                         payment.setShoppingCart(shoppingCart);
                         payment.setFormOfPayment(dto.getFormOfPayment());
                         payment.setPaymentStatus(PaymentStatus.SUCCESS);
+
+                        shoppingCart.setSuccessfulPayment(true);
                     }
                     break;
                 case TICKET:
@@ -102,6 +106,8 @@ public class PaymentController extends GenericControllerImpl<Payment, UUID, Paym
                 default:
                     break;
             }
+
+            shoppingCartBusiness.update(shoppingCart.getId(), shoppingCart);
 
             return ResponseEntity.ok(
                     successMessage.MessageReturn("Success", HttpStatus.OK.value(), service.save(payment))

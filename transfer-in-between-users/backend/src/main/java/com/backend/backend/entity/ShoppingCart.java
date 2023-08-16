@@ -58,7 +58,7 @@ public class ShoppingCart extends BaseEntity {
         this.totalPayment = totalPayment;
     }
 
-    public boolean isSuccessfulPayment() {
+    public boolean getSuccessfulPayment() {
         return successfulPayment;
     }
 
