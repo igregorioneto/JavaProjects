@@ -1,10 +1,13 @@
 package org.tic_tac_toe.model;
 
 public class TicTacToe {
-    GameBoard gb;
+    private GameBoard gb;
     public TicTacToe() {
-        Player p1 = new Player();
         gb = new GameBoard();
+    }
+
+    public GameBoard getGb() {
+        return gb;
     }
 
     @Override

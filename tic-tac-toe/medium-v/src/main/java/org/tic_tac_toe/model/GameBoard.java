@@ -28,8 +28,10 @@ public class GameBoard {
     }
 
     public void makePlayerBoard(int x, int y,Player p) {
-        if (p != null && arrayBoard[x][y] == null)
+        if (p != null && arrayBoard[x][y] == null) {
             arrayBoard[x][y] = p;
+            verifyStatusGame(p);
+        }
     }
 
     private void verifyStatusGame(Player p) {
@@ -45,6 +47,14 @@ public class GameBoard {
             startGame = false;
             win = p;
         }
+    }
+
+    public boolean isStartGame() {
+        return startGame;
+    }
+
+    public void setStartGame(boolean startGame) {
+        this.startGame = startGame;
     }
 
     @Override
