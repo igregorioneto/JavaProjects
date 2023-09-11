@@ -1,0 +1,32 @@
+* {
+    margim: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* 3 colunas */
+    grid-template-rows: repeat(3, 100px);    /* 3 linhas */
+    gap: 5px; /* Espaço entre as células */
+    width: 315px; /* Largura total do tabuleiro */
+    margin: 0 auto; /* Centralizar o tabuleiro horizontalmente */
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #eee;
+}
