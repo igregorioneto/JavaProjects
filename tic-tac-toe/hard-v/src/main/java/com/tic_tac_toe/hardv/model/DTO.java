@@ -3,27 +3,22 @@ package com.tic_tac_toe.hardv.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DTO {
-    @JsonProperty("TicTocToe")
-    private TicTocToe ticTocToe;
+    @JsonProperty("TicTacToe")
+    private TicTacToe ticTacToe;
 
     @JsonProperty("Player")
     private Player player;
 
-
     public DTO() {
     }
 
-    public DTO(TicTocToe ticTocToe, Player player) {
-        this.ticTocToe = ticTocToe;
+    public DTO(TicTacToe ticTacToe, Player player, boolean startGame) {
+        this.ticTacToe = ticTacToe;
         this.player = player;
     }
 
-    public TicTocToe getTicTocToe() {
-        return ticTocToe;
-    }
-
-    public void setTicTocToe(TicTocToe ticTocToe) {
-        this.ticTocToe = ticTocToe;
+    public TicTacToe getTicTacToe() {
+        return ticTacToe;
     }
 
     public Player getPlayer() {
@@ -32,5 +27,9 @@ public class DTO {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setTicTacToe(TicTacToe ticTacToe) {
+        this.ticTacToe = ticTacToe;
     }
 }

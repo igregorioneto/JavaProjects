@@ -1,13 +1,13 @@
 package com.tic_tac_toe.hardv.model;
 
-public class TicTocToe {
+public class TicTacToe {
     private int x;
     private int y;
 
-    public TicTocToe() {
+    public TicTacToe() {
     }
 
-    public TicTocToe(int x, int y) {
+    public TicTacToe(int x, int y) {
         this.x = x;
         this.y = y;
     }

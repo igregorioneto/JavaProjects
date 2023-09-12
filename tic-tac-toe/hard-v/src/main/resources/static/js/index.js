@@ -2,7 +2,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const socket = new WebSocket("ws://localhost:8080/conect");
     const Client = Stomp.over(socket);
 
+    var start = false;
+
     const board = document.getElementById("board");
+    const loading = document.getElementById("loading");
+    loading.innerHTML = "Starting Game...";
+    loading.style.display = "block";
+    board.style.display = "none";
+
+    const result = document.getElementById("result");
+
+    const startGameDiv = document.getElementById("startGame");
+
+    const buttonStartGame = document.createElement("button");
+    buttonStartGame.innerHTML = "Start Game";
+
+    buttonStartGame.onclick = function() {
+        start = !start;
+        const message = {
+            startGame: start
+        }
+        Client.send("/app/startGame", {}, JSON.stringify(message));
+
+        if (start) {
+            loading.style.display = "none";
+            board.style.display = "grid";
+            buttonStartGame.innerHTML = "Playing...";
+        } else {
+            loading.style.display = "block";
+            board.style.display = "none";
+            buttonStartGame.innerHTML = "Start Game";
+        }
+    }
+
+    function handleStartGame(s) {
+        console.log(s);
+    }
+
+    startGameDiv.appendChild(buttonStartGame);
+
+    result.textContent = "Player Win: ";
 
     const cells = new Array(3).fill(null).map(() => new Array(3).fill(null));
     let player = {"representation": "X"};
@@ -41,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleSendMakePlayer(x, y, Player) {
         const message = {
-            TicTocToe: {
+            TicTacToe: {
                 x,
                 y,
             },
@@ -51,4 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
         Client.send("/app/makePlayer", {}, JSON.stringify(message));
     }
 
+    function modifyPlayerWin(r) {
+        console.log(r);
+        result.textContent = "Player Win: " + r;
+    }
+
+    function connection() {
+        Client.connect({}, function(frame) {
+            console.log("Conectado: " + frame);
+
+            Client.subscribe("/tictactoe", function(result) {
+                const r = result.body;
+                modifyPlayerWin(r);
+            });
+
+            Client.subscribe("/start", function(result) {
+                const s = result.body;
+                handleStartGame(s);
+            })
+        });
+    }
+
+    connection();
 });
+
