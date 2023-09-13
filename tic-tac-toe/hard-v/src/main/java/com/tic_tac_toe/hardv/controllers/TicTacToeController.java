@@ -24,7 +24,7 @@ public class TicTacToeController {
             System.out.println("Iniciar o jogo");
         }
         System.out.println("Win: " + gl.getWin());
-        return gl.getWin();
+        return gl.getWin() + "";
     }
 
     @MessageMapping("/startGame")

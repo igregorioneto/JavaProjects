@@ -12,8 +12,8 @@ public class WebSocket implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/tictactoe");
-        config.enableSimpleBroker("/start");
+        config.enableSimpleBroker("/tictactoe", "/start");
+        //config.enableSimpleBroker("/start");
         config.setApplicationDestinationPrefixes("/app");
     }
 

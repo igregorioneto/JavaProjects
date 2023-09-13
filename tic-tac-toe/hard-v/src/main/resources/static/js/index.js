@@ -96,13 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function connection() {
+
         Client.connect({}, function(frame) {
             console.log("Conectado: " + frame);
 
             Client.subscribe("/tictactoe", function(result) {
                 const r = result.body;
+                console.log(r);
                 modifyPlayerWin(r);
-            });
+            })
 
             Client.subscribe("/start", function(result) {
                 const s = result.body;

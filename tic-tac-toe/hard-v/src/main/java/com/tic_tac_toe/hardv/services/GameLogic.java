@@ -32,8 +32,29 @@ public class GameLogic {
     private boolean isPlayerWin(String representation) {
         if (arrayPlayers[0][0].equals(representation) &&
                 arrayPlayers[1][1].equals(representation) &&
-                arrayPlayers[2][2].equals(representation)
-        ) {
+                arrayPlayers[2][2].equals(representation) ||
+                arrayPlayers[0][0].equals(representation) &&
+                arrayPlayers[0][1].equals(representation) &&
+                arrayPlayers[0][2].equals(representation) ||
+                arrayPlayers[1][0].equals(representation) &&
+                arrayPlayers[1][1].equals(representation) &&
+                arrayPlayers[1][2].equals(representation) ||
+                arrayPlayers[2][0].equals(representation) &&
+                arrayPlayers[2][1].equals(representation) &&
+                arrayPlayers[2][2].equals(representation) ||
+                arrayPlayers[0][0].equals(representation) &&
+                arrayPlayers[1][0].equals(representation) &&
+                arrayPlayers[2][0].equals(representation) ||
+                arrayPlayers[0][1].equals(representation) &&
+                arrayPlayers[1][1].equals(representation) &&
+                arrayPlayers[2][1].equals(representation) ||
+                arrayPlayers[0][2].equals(representation) &&
+                arrayPlayers[1][2].equals(representation) &&
+                arrayPlayers[2][2].equals(representation) ||
+                arrayPlayers[0][2].equals(representation) &&
+                arrayPlayers[1][1].equals(representation) &&
+                arrayPlayers[2][0].equals(representation)
+) {
             return true;
         }
         return false;
