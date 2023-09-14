@@ -59,6 +59,13 @@ Objetivo:
         (Em desenvolvimento) Projeto para simular o cadastro de um usuário, vinculando a uma conta para efetuar compras até a simulação de pagamento.
         Projeto seguindo boas práticas e reaproveitamento do Código. <a href="https://github.com/igregorioneto/JavaProjects/tree/main/transfer-in-between-users">clicar aqui</a>.
     </li>
+
+<li>
+        <a href="https://github.com/igregorioneto/JavaProjects/tree/main/tic-tac-toe">
+            [Tic Tac Toe] 
+        </a>
+        Desenvolvi 4 Versões do Tic Tac Toe, um com Java, outro Java com MVC, Outro Spring Websocket e Javascript no frontend e o último utilizando a biblioteca LibGDX com Java. <a href="https://github.com/igregorioneto/JavaProjects/tree/main/tic-tac-toe">clicar aqui</a>.
+    </li>
 </ul>
 </p>
 
