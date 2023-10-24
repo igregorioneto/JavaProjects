@@ -7,9 +7,13 @@ import java.util.Set;
 
 @MappedSuperclass
 public class User <T> extends BaseEntity{
+    @Column
     private String name;
 
+    @Column
     private String email;
+
+    @Column
     private String password;
 
     @ElementCollection(targetClass = UserRole.class)

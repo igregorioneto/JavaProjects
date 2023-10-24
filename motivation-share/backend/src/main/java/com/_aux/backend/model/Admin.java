@@ -3,13 +3,18 @@ package com._aux.backend.model;
 import com._aux.backend.enums.AdminLevel;
 import com._aux.backend.enums.AdminTitle;
 import com._aux.backend.enums.UserRole;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.util.Collections;
 
 @Entity
+@Table(name = "tb_users_admin")
 public class Admin extends User<UserRole> {
+    @Enumerated(EnumType.STRING)
+    @Column
     private AdminTitle title;
+    @Enumerated(EnumType.STRING)
+    @Column
     private AdminLevel level;
     public Admin() {
         setRoles(Collections.singleton(UserRole.ADM));
