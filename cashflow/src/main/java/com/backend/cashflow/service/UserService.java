@@ -35,6 +35,18 @@ public class UserService {
     public UserService() {
     }
 
+    public UserService(UserRepository repository,
+                       EmailVerify emailVerify,
+                       ColumnVerify columnVerify,
+                       PasswordHasher passwordHasher,
+                       PasswordVerify passwordVerify) {
+        this.repository = repository;
+        this.emailVerify = emailVerify;
+        this.columnVerify = columnVerify;
+        this.passwordHasher = passwordHasher;
+        this.passwordVerify = passwordVerify;
+    }
+
     public List<User> getAllUsers() {
         return repository.findAll();
     }
