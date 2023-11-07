@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceTest {
 
@@ -65,18 +66,66 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testFindById() {
+        // Passando a informação do usuário com ID
+        User user = new User();
+        user.setId(1L);
+        user.setName("John Doe");
+        user.setEmail("johndoe@exemplo.com");
+        user.setPassword("Pass12!");
+
+        when(repository.findById(user.getId())).thenReturn(Optional.of(user));
+
+        Optional<User> getUserById = service.getUserById(1L);
+
+        assertEquals(user, getUserById.get());
+    }
+
+    @Test
     public void testCreateUser_ValidUser() {
         User user = new User();//"John Doe", "johndoe@exemplo.com", "Pass12!"
         user.setName("John Doe");
         user.setEmail("johndoe@exemplo.com");
         user.setPassword("Pass12!");
 
+        // Simulando o comportamento esperado do hash da senha
+        when(passwordHasher.hashPassword(user.getPassword())).thenReturn("Pass12!");
+
         // Simulando o comportamento esperado das dependências
-        //when(repository.save(user)).thenReturn(user);
+        when(repository.save(user)).thenReturn(user);
+        when(emailVerify.isEmailValid(user.getEmail())).thenReturn(true);
+        when(columnVerify.isColumnValid(user.getName(), StringLength.NAME)).thenReturn(true);
+        when(columnVerify.isColumnValid(user.getPassword(), StringLength.PASSWORD)).thenReturn(true);
+        when(passwordVerify.isPasswordValid(user.getPassword())).thenReturn(true);
+
 
         User createUser = service.createUser(user);
 
         assertEquals(user, createUser);
+    }
+
+
+    @Test
+    public void testDeleteUser_UserExists() {
+        Long userId = 1l;
+        // Simulando o comportamento esperado do repository
+        when(repository.existsById(userId)).thenReturn(true);
+
+        service.deleteUser(userId);
+
+        // Verificar se o método foi chamado
+        verify(repository).deleteById(userId);
+    }
+
+    @Test
+    public void testDeleteUser_UserNotExists() {
+        Long userId = 1L;
+
+        // Simulando o comportamento esperado do repository
+        when(repository.existsById(userId)).thenReturn(false);
+
+        // O método deve lançar uma exceção
+        assertThrows(IllegalArgumentException.class, () -> service.deleteUser(userId));
     }
 
 }

@@ -95,16 +95,15 @@ public class UserService {
             user.setId(id);
             return repository.save(user);
         } else {
-            //throw new UserNotFoundException("User not found with id: " + id);
+            throw new IllegalArgumentException("User not found with id: " + id);
         }
-        return null;
     }
 
     public void deleteUser(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         } else {
-            //throw new UserNotFoundException("User not found with id: " + id);
+            throw new IllegalArgumentException("User not found with id: " + id);
         }
     }
 }
