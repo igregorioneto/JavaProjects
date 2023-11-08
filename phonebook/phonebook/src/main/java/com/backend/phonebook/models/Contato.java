@@ -50,4 +50,12 @@ public class Contato {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 }
