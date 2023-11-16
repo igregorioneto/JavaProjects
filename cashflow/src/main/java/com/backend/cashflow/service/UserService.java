@@ -86,6 +86,11 @@ public class UserService {
         return repository.save(user);
     }
 
+    /*
+    * @param String
+    * @return boolean
+    * Verifica se o e-mail esta registrado
+    * */
     private boolean isEmailAlreadyRegistered(String email) {
         return repository.existsEmail(email);
     }
