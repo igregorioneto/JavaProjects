@@ -27,4 +27,14 @@ public class TransactionController {
         return service.getAllTransactions();
     }
 
+    @PostMapping
+    public ResponseEntity<?> makeWithdrawal(@RequestBody Transaction transaction) {
+        try {
+            Transaction t = service.makeWithdrawal(transaction);
+            return new ResponseEntity<>(t, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.backend.cashflow.model
 
+import com.backend.cashflow.enums.TypeTransaction
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 
 @Entity
@@ -11,10 +13,10 @@ import jakarta.persistence.Table
 class Transaction (
     var price: Double? = null,
     var date: String? = null,
-    var status: String? = null,
+    var type: TypeTransaction? = null,
+    var toUser: Long? = null,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     var user: User
 ) : BaseEntity()

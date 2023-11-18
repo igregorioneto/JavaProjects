@@ -25,5 +25,8 @@ public class TransactionService {
         return repository.findAll();
     }
 
+    public Transaction makeWithdrawal(Transaction transaction) {
+        return repository.save(transaction);
+    }
 
 }
