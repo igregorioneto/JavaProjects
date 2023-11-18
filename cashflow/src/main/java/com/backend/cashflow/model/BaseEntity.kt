@@ -8,9 +8,7 @@ import jakarta.persistence.MappedSuperclass
 @MappedSuperclass
 open class BaseEntity (
     @Suppress("UNSED")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @field:Id
+    @field:GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null
-) {
-    constructor() : this(0)
-}
+)

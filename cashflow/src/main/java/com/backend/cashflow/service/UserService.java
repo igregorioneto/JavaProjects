@@ -15,25 +15,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
-
-    @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    private EmailVerify emailVerify;
-
-    @Autowired
-    private ColumnVerify columnVerify;
-
-    @Autowired
-    private PasswordHasher passwordHasher;
-
-    @Autowired
-    private PasswordVerify passwordVerify;
-
-    public UserService() {
-    }
+    private final UserRepository repository;
+    private final EmailVerify emailVerify;
+    private final ColumnVerify columnVerify;
+    private final PasswordHasher passwordHasher;
+    private final PasswordVerify passwordVerify;
 
     public UserService(UserRepository repository,
                        EmailVerify emailVerify,
@@ -70,6 +56,12 @@ public class UserService {
                     " e maior que " + StringLength.NAME.getMaxLength());
         }
 
+        if (!columnVerify.isColumnValueValid(user.getBalance(), StringLength.BALANCE)) {
+            throw new IllegalArgumentException("O Campo balance esta nulo ou vazio ou valor é menor que "
+                    + StringLength.BALANCE.getMinLength() +
+                    " e maior que " + StringLength.BALANCE.getMaxLength());
+        }
+
         if (!columnVerify.isColumnValid(user.getPassword(), StringLength.PASSWORD)) {
             throw new IllegalArgumentException("O Campo senha esta nulo ou vazio ou sua quantidade de caracteres é menor que "
                     + StringLength.PASSWORD.getMinLength() +
@@ -87,10 +79,10 @@ public class UserService {
     }
 
     /*
-    * @param String
-    * @return boolean
-    * Verifica se o e-mail esta registrado
-    * */
+     * @param String
+     * @return boolean
+     * Verifica se o e-mail esta registrado
+     * */
     private boolean isEmailAlreadyRegistered(String email) {
         return repository.existsEmail(email);
     }

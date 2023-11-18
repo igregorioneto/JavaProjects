@@ -13,11 +13,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/users")
 public class UserController {
+    private final UserService service;
 
-    @Autowired
-    private UserService service;
-
-    public UserController() {
+    public UserController(UserService service) {
+        this.service = service;
     }
 
     @GetMapping
