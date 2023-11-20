@@ -7,7 +7,6 @@ import com.backend.cashflow.util.PasswordHasher;
 import com.backend.cashflow.verification.ColumnVerify;
 import com.backend.cashflow.verification.EmailVerify;
 import com.backend.cashflow.verification.PasswordVerify;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,14 +41,6 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        if (isEmailAlreadyRegistered(user.getEmail())) {
-            throw new IllegalArgumentException("E-mail cadastrado. Por favor, digitar um novo E-mail.");
-        }
-
-        if (!emailVerify.isEmailValid(user.getEmail())) {
-            throw new IllegalArgumentException("E-mail inválido. O E-mail deve seguir com um formato válido.");
-        }
-
         if (!columnVerify.isColumnValid(user.getName(), StringLength.NAME)) {
             throw new IllegalArgumentException("O Campo nome esta nulo ou vazio ou sua quantidade de caracteres é menor que"
                     + StringLength.NAME.getMinLength() +
@@ -62,29 +53,7 @@ public class UserService {
                     " e maior que " + StringLength.BALANCE.getMaxLength());
         }
 
-        if (!columnVerify.isColumnValid(user.getPassword(), StringLength.PASSWORD)) {
-            throw new IllegalArgumentException("O Campo senha esta nulo ou vazio ou sua quantidade de caracteres é menor que "
-                    + StringLength.PASSWORD.getMinLength() +
-                    " e maior que " + StringLength.PASSWORD.getMaxLength());
-        }
-
-        if (!passwordVerify.isPasswordValid(user.getPassword())) {
-            throw new IllegalArgumentException("Senha deve conter pelo menos 1 Letra Maiúscula, 1 Letra Minúscula, 1 Caractere Especial e 1 Número");
-        }
-
-        String password = passwordHasher.hashPassword(user.getPassword());
-        user.setPassword(password);
-
         return repository.save(user);
-    }
-
-    /*
-     * @param String
-     * @return boolean
-     * Verifica se o e-mail esta registrado
-     * */
-    private boolean isEmailAlreadyRegistered(String email) {
-        return repository.existsEmail(email);
     }
 
     public User updateUser(Long id, User user) {

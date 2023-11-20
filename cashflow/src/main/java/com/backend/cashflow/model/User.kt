@@ -8,8 +8,11 @@ import jakarta.persistence.*
 class User (
     var name: String? = null,
     var balance: Double? = null,
-    var email: String? = null,
-    var password: String? = null,
+
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    var account: Account,
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
     @JsonIgnore
     var transactions: List<Transaction>
