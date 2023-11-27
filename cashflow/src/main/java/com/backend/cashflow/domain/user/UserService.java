@@ -1,12 +1,11 @@
-package com.backend.cashflow.service;
+package com.backend.cashflow.domain.user;
 
+import com.backend.cashflow.api.user.UserRequest;
 import com.backend.cashflow.enums.StringLength;
-import com.backend.cashflow.model.User;
-import com.backend.cashflow.repository.UserRepository;
 import com.backend.cashflow.util.PasswordHasher;
-import com.backend.cashflow.verification.ColumnVerify;
-import com.backend.cashflow.verification.EmailVerify;
-import com.backend.cashflow.verification.PasswordVerify;
+import com.backend.cashflow.util.verification.ColumnVerify;
+import com.backend.cashflow.util.verification.EmailVerify;
+import com.backend.cashflow.util.verification.PasswordVerify;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,18 +39,20 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public User createUser(User user) {
-        if (!columnVerify.isColumnValid(user.getName(), StringLength.NAME)) {
+    public User createUser(UserRequest userRequest) {
+        if (!columnVerify.isColumnValid(userRequest.name(), StringLength.NAME)) {
             throw new IllegalArgumentException("O Campo nome esta nulo ou vazio ou sua quantidade de caracteres é menor que"
                     + StringLength.NAME.getMinLength() +
                     " e maior que " + StringLength.NAME.getMaxLength());
         }
 
-        if (!columnVerify.isColumnValueValid(user.getBalance(), StringLength.BALANCE)) {
+        if (!columnVerify.isColumnValueValid(userRequest.balance(), StringLength.BALANCE)) {
             throw new IllegalArgumentException("O Campo balance esta nulo ou vazio ou valor é menor que "
                     + StringLength.BALANCE.getMinLength() +
                     " e maior que " + StringLength.BALANCE.getMaxLength());
         }
+
+        User user = new User(userRequest.name(), userRequest.balance());
 
         return repository.save(user);
     }

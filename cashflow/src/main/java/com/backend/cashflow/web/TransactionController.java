@@ -1,16 +1,13 @@
-package com.backend.cashflow.controller;
+package com.backend.cashflow.web;
 
-import com.backend.cashflow.model.Transaction;
-import com.backend.cashflow.model.User;
-import com.backend.cashflow.service.TransactionService;
-import com.backend.cashflow.service.UserService;
+import com.backend.cashflow.domain.transaction.Transaction;
+import com.backend.cashflow.domain.transaction.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/transactions")

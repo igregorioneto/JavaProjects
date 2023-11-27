@@ -1,7 +1,7 @@
-package com.backend.cashflow.controller;
+package com.backend.cashflow.web;
 
-import com.backend.cashflow.model.Account;
-import com.backend.cashflow.service.AccountService;
+import com.backend.cashflow.domain.account.Account;
+import com.backend.cashflow.domain.account.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

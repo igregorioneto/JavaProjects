@@ -1,7 +1,7 @@
-package com.backend.cashflow.service;
+package com.backend.cashflow.domain.transaction;
 
-import com.backend.cashflow.model.Transaction;
-import com.backend.cashflow.repository.TransactionRepository;
+import com.backend.cashflow.domain.transaction.Transaction;
+import com.backend.cashflow.domain.transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
-package com.backend.cashflow.repository;
+package com.backend.cashflow.domain.account;
 
-import com.backend.cashflow.model.Account;
-import com.backend.cashflow.model.Transaction;
+import com.backend.cashflow.domain.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,5 +1,8 @@
-package com.backend.cashflow.model;
+package com.backend.cashflow.domain.user;
 
+import com.backend.cashflow.domain.core.BaseEntity;
+import com.backend.cashflow.domain.account.Account;
+import com.backend.cashflow.domain.transaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,17 +23,12 @@ public class User extends BaseEntity {
     @JsonIgnore
     private List<Transaction> transactions;
 
-    // Construtores, getters e setters podem ser adicionados conforme necessário
-
-
     public User() {
     }
 
-    public User(String name, Double balance, Account account, List<Transaction> transactions) {
+    public User(String name, Double balance) {
         this.name = name;
         this.balance = balance;
-        this.account = account;
-        this.transactions = transactions;
     }
 
     public String getName() {

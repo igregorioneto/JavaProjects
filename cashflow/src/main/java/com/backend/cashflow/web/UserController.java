@@ -1,11 +1,14 @@
-package com.backend.cashflow.controller;
+package com.backend.cashflow.web;
 
-import com.backend.cashflow.model.User;
-import com.backend.cashflow.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.backend.cashflow.api.user.UserRequest;
+import com.backend.cashflow.api.user.UserResponse;
+import com.backend.cashflow.domain.user.User;
+import com.backend.cashflow.domain.user.UserMapper;
+import com.backend.cashflow.domain.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +34,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@RequestBody UserRequest request) {
         try {
-            User createdUser = service.createUser(user);
-            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+            UserResponse u = service.createUser(request).map(UserMapper::toResponse).block();
+            return ResponseEntity.status(HttpStatus.CREATED).body(u);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.ok(e.getMessage());
         }

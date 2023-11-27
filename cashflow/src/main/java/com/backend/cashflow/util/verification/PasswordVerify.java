@@ -1,4 +1,4 @@
-package com.backend.cashflow.verification;
+package com.backend.cashflow.util.verification;
 
 import org.springframework.stereotype.Component;
 

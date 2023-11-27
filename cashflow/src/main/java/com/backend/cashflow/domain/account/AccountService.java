@@ -1,16 +1,10 @@
-package com.backend.cashflow.service;
+package com.backend.cashflow.domain.account;
 
 import com.backend.cashflow.enums.StringLength;
-import com.backend.cashflow.model.Account;
-import com.backend.cashflow.model.Transaction;
-import com.backend.cashflow.model.User;
-import com.backend.cashflow.repository.AccountRepository;
-import com.backend.cashflow.repository.TransactionRepository;
 import com.backend.cashflow.util.PasswordHasher;
-import com.backend.cashflow.verification.ColumnVerify;
-import com.backend.cashflow.verification.EmailVerify;
-import com.backend.cashflow.verification.PasswordVerify;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.backend.cashflow.util.verification.ColumnVerify;
+import com.backend.cashflow.util.verification.EmailVerify;
+import com.backend.cashflow.util.verification.PasswordVerify;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

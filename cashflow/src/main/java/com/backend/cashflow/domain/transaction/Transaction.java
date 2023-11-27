@@ -1,5 +1,7 @@
-package com.backend.cashflow.model;
+package com.backend.cashflow.domain.transaction;
 
+import com.backend.cashflow.domain.core.BaseEntity;
+import com.backend.cashflow.domain.user.User;
 import com.backend.cashflow.enums.TypeTransaction;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

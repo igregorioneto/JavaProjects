@@ -2,13 +2,13 @@ package com.backend.cashflow.service;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-import com.backend.cashflow.enums.StringLength;
-import com.backend.cashflow.model.User;
-import com.backend.cashflow.repository.UserRepository;
+import com.backend.cashflow.domain.user.User;
+import com.backend.cashflow.domain.user.UserRepository;
+import com.backend.cashflow.domain.user.UserService;
 import com.backend.cashflow.util.PasswordHasher;
-import com.backend.cashflow.verification.ColumnVerify;
-import com.backend.cashflow.verification.EmailVerify;
-import com.backend.cashflow.verification.PasswordVerify;
+import com.backend.cashflow.util.verification.ColumnVerify;
+import com.backend.cashflow.util.verification.EmailVerify;
+import com.backend.cashflow.util.verification.PasswordVerify;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -16,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class UserServiceTest {
 
